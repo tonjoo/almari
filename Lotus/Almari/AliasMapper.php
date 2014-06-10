@@ -83,7 +83,7 @@ class AliasMapper
 
     }
 
-     /**
+    /**
      * Returns the *Singleton* instance of this class.
      */
     public static function getInstance()
