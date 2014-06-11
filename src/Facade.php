@@ -36,9 +36,9 @@ abstract class Facade {
     protected static $container;
 
     /**
-     * Set the application instance
+     * Set the container instance
      */
-    public static function setFacadeApp($container)
+    public static function setFacadeContainer($container)
     {
         static::$container = $container;
     }
@@ -54,7 +54,7 @@ abstract class Facade {
     public static function __callStatic($method, $args)
     {
 
-        // Resolve instance from application
+        // Resolve instance from container
         $instance = static::$container->get(static::getFacadeAccessor());
       
         $name = get_class($instance);
