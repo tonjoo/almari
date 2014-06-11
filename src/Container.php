@@ -32,17 +32,17 @@ class Container
 {
 
     /**
-     * Array to store type bind to container 
+     * Array to store service registered to container 
      */
     protected $instances = array();
 
     /**
-     * Resolved type
+     * Resolved service
      */
     protected $resolved= array();
 
     /**
-     * Bind singeleteon type to the container
+     * Register singeleteon type to the container
      */
     public function share($name,$params)
     {
@@ -55,9 +55,9 @@ class Container
     }
 
     /**
-     * Bind type to the container
+     * Register service to the container
      */
-    public function bind($name, $params)
+    public function register($name, $params)
     {
 
         $this->instances[$name] = $params;
