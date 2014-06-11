@@ -11,8 +11,8 @@
         }
     ],
     "autoload": {
-        "psr-0": { 
-            "Lotus": "src/"
+        "psr-4": { 
+             "Lotus\\Almari\\": "src/"
         }
     }
 }
