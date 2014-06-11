@@ -25,7 +25,6 @@ The main container class is `Lotus\Almari\Container`
 
 ### Adding service to container
 ```php
-
 use Lotus\Almari\Container as Container
 
 $app = new Container();
@@ -49,15 +48,13 @@ $app->register('foo',$foo);
 ```
 ### Retrieve service
 ```php
-
 $app->get('foo',$defaultValue);
-
 
 ```
 
 ### Facade ability
 
-Full example here :
+Full example here : https://github.com/tonjoo/almari-boilerplate
 
 ```php
 // Facading $foo to FooFacade
