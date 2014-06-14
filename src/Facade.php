@@ -31,7 +31,7 @@ abstract class Facade {
     /**
      * The container for facaded class
      */
-    protected static $container;
+     static $container;
 
     /**
      * Set the container instance
@@ -50,8 +50,7 @@ abstract class Facade {
     }
 
     public static function __callStatic($method, $args)
-    {
-
+    {      
         // Resolve instance from container
         $instance = static::$container->get(static::getFacadeAccessor());
       
