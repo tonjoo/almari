@@ -32,12 +32,12 @@ class Container
     /**
      * Array to store service registered to container 
      */
-    protected $instances = [];
+    protected $instances = array();
 
     /**
      * Resolved service
      */
-    protected $resolved= [];
+    protected $resolved= array();
 
     /**
      * Register singeleteon type to the container
