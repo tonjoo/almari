@@ -25,8 +25,9 @@
 */
 
 namespace Lotus\Almari;
+use ArrayAccess;
 
-class Container
+class Container implements ArrayAccess
 {
 
     /**
@@ -108,5 +109,26 @@ class Container
         }    
 
         return $this->instances[$name];
+    }
+
+    /**
+     * Implementing Array Access
+     */
+    public function offsetExists($offset)
+    {
+         return isset($this->instances[$offset]);
+    }
+    public function offsetGet($offset)
+    {
+        return $this->get($offset);
+    }
+    public function offsetSet($offset,$value)
+    {
+        $this->register($offset,$value);
+    }
+    public function offsetUnset($offset)
+    {
+        unset($this->resolved[$offset]);
+        unset($this->instances[$offset]);
     }
 }
