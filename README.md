@@ -35,6 +35,9 @@ $foo = new Foo();
 // Share a service as singeleton
 $app->share('fooSingeleton',$foo);
 
+// Or using array access
+$app['fooSingeleton'] = $foo;
+
 // Using closure
 $app->share('fooSingeleton',function(){
 
@@ -49,6 +52,9 @@ $app->register('foo',$foo);
 ### Retrieve service
 ```php
 $app->get('foo',$defaultValue);
+
+// Or using array access
+$app['foo'];
 
 ```
 
