@@ -24,7 +24,7 @@
 * THE SOFTWARE.
 */
 
-namespace Lotus\Almari;
+namespace Tonjoo\Almari;
 use ArrayAccess;
 
 class Container implements ArrayAccess
@@ -38,10 +38,27 @@ class Container implements ArrayAccess
     /**
      * Resolved service
      */
-    protected $resolved= array();
+    protected $resolved = array();
 
     /**
-     * Register singeleteon type to the container
+     * Service bind to container
+     */
+    protected $bind = array();
+
+    /**
+     * Register service to the container (
+     */
+    public function bind($name,$params) 
+    {
+
+        $this->instances[$name] = $params;
+
+        $this->bind[$name] = true;
+
+    }
+
+    /**
+     * Register unresolved singleton service to the container (late binding)
      */
     public function share($name,$params)
     {
@@ -54,7 +71,7 @@ class Container implements ArrayAccess
     }
 
     /**
-     * Register service to the container
+     * Register singleton service to the container
      */
     public function register($name, $params)
     {
@@ -63,6 +80,14 @@ class Container implements ArrayAccess
 
         $this->resolved[$name] = true;
 
+    }
+
+    /*
+     * Alias of get
+     */
+    public function make($name,$default=null)
+    {
+        return $this->get($name,$default);
     }
 
     /**
@@ -74,6 +99,10 @@ class Container implements ArrayAccess
         // Return null if the type is not bind to container
         if(!isset($this->instances[$name]))
              return $default;
+
+        if(array_key_exists($name,$this->bind))
+            return $this->resolve($name);
+
 
         // Check if the type has been resolved in the container
         if(!$this->resolved[$name]){

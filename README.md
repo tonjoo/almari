@@ -23,38 +23,55 @@ Basic Usage
 
 The main container class is `Lotus\Almari\Container`
 
-### Adding service to container
+### Adding service
 ```php
 use Lotus\Almari\Container as Container
 
 $app = new Container();
 
+// Create service, return new Foo instance
+$app->bind('foo',function(){
+
+	return new Foo();
+
+});
+```
+
+### Retrieve Service
+```
+$newFoo = $app->make('foo');
+
+$newFoo2 = $app->make('foo');
+```
+
+### Adding instance to container
+```php
+use Lotus\Almari\Container as Container
+
+$app = new Container();
 
 $foo = new Foo();
 
-// Share a service as singeleton
-$app->share('fooSingeleton',$foo);
+// Share an instance
+$app->register('fooSingeleton',$foo);
 
-// Or using array access
-$app['fooSingeleton'] = $foo;
-
-// Using closure
+// Share an instance (lazy load)
 $app->share('fooSingeleton',function(){
 
-        return new Foo();
+	return new Foo();
 
-        });
-        
-// register a service to container
-$app->register('foo',$foo);
+});
+
+// Save instance using array access
+$app['fooSingeleton'] = $foo;
 
 ```
-### Retrieve service
+### Retrieve instance
 ```php
-$app->get('foo',$defaultValue);
+$myFoo = app->get('foo',$defaultValue);
 
 // Or using array access
-$app['foo'];
+$myFoo = app['foo'];
 
 ```
 

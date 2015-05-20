@@ -24,14 +24,14 @@
 * THE SOFTWARE.
 */
 
-namespace Lotus\Almari;
+namespace Tonjoo\Almari;
 
 class AliasMapper
 {
-	/**
-	 * Instance for this AliasLoader
-	 */
-	static $instance = null;
+    /**
+     * Instance for this AliasLoader
+     */
+    static $instance = null;
 
     /*
      * Bind Facade Class Alias

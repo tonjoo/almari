@@ -24,7 +24,7 @@
 * THE SOFTWARE.
 */
 
-namespace Lotus\Almari;
+namespace Tonjoo\Almari;
 
 abstract class Facade {
 
@@ -52,7 +52,7 @@ abstract class Facade {
     public static function __callStatic($method, $args)
     {      
         // Resolve instance from container
-        $instance = static::$container->get(static::getFacadeAccessor());
+        $instance = static::$container->make(static::getFacadeAccessor());
       
         $name = get_class($instance);
 
@@ -60,7 +60,7 @@ abstract class Facade {
             throw new \Exception($name . ' does not implement ' . $method . ' method.');
         }
 
-        return call_user_func_array([ $instance, $method ], $args);
+        return $instance->$method($args);
     }
 
 }
