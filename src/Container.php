@@ -58,7 +58,7 @@ class Container implements ArrayAccess
     }
 
     /**
-     * Register unresolved singleton service to the container (late binding)
+     * Share singleton service to the container (lazy load)
      */
     public function share($name,$params)
     {
@@ -68,18 +68,6 @@ class Container implements ArrayAccess
         // Mark the type as not resolved
         $this->resolved[$name] = false;
   
-    }
-
-    /**
-     * Register singleton service to the container
-     */
-    public function register($name, $params)
-    {
-
-        $this->instances[$name] = $params;
-
-        $this->resolved[$name] = true;
-
     }
 
     /*
@@ -153,7 +141,7 @@ class Container implements ArrayAccess
     }
     public function offsetSet($offset,$value)
     {
-        $this->register($offset,$value);
+        $this->share($offset,$value);
     }
     public function offsetUnset($offset)
     {
