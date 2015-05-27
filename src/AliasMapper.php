@@ -34,30 +34,6 @@ class AliasMapper
     static $instance = null;
 
     /*
-     * Bind Facade Class Alias
-     */
-    public function facadeClassAlias($alias)
-    {
-
-        foreach ($alias as $key => $value) {
-
-            $facadeClass = new $value;
-
-            // Throw Error on getFacadeAccessor method not found
-            if(!method_exists($facadeClass,'getFacadeAccessor')){
-                throw new \Exception("Facade class does not implement getFacadeAccessor method");
-            }
-
-            $accessorClass = $facadeClass->getFacadeAccessor();
-
-            // Register Facade Alias Static Class
-            class_alias($value,$key);
-        
-        }
-
-    }
-
-    /*
      * Bind Class Alias
      */
     public function classAlias($alias)

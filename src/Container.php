@@ -46,21 +46,20 @@ class Container implements ArrayAccess
     protected $bind = array();
 
     /**
-     * Register service to the container (
+     * Register service to the container
      */
     public function bind($name,$params) 
     {
 
         $this->instances[$name] = $params;
-
         $this->bind[$name] = true;
 
     }
 
     /**
-     * Share singleton service to the container (lazy load)
+     * Share singleton to the container (lazy load / defered)
      */
-    public function share($name,$params)
+    public function shareDeferred($name,$params)
     {
 
         $this->instances[$name] = $params;
@@ -70,21 +69,24 @@ class Container implements ArrayAccess
   
     }
 
-    /*
-     * Alias of get
+    /**
+     * Share singleton to the container (eager)
      */
-    public function make($name,$default=null)
+    public function share($name,$params)
     {
-        return $this->get($name,$default);
+
+        $this->instances[$name] = $params;
+        $this->instances[$name] = $this->resolve($name);
+    
     }
 
     /**
-     * Get type from container
+     * Get service from container
      */
     public function get($name,$default=null)
     {
 
-        // Return null if the type is not bind to container
+        // Return null if the service is not in the container
         if(!isset($this->instances[$name]))
              return $default;
 
@@ -92,12 +94,11 @@ class Container implements ArrayAccess
             return $this->resolve($name);
 
 
-        // Check if the type has been resolved in the container
+        // Check if the service has been resolved in the container
         if(!$this->resolved[$name]){
 
             $this->instances[$name] = $this->resolve($name);
-
-            $this->resolved[$name] = true;
+            
 
             return $this->instances[$name];
         }
@@ -106,18 +107,24 @@ class Container implements ArrayAccess
     }
 
     /**
-     * Try to resolve the type
+     * Try to resolve the service
      */ 
-    private function resolve($name){
-
-        // resolve the type
-        if (is_string($this->instances[$name]) && class_exists($this->instances[$name])) {
+    private function resolve($name)
+    {   
+        // set as resolved
+        $this->resolved[$name] = true;
+        
+        // resolve the service
+        if (is_string($this->instances[$name]) && class_exists($this->instances[$name])) 
+        {
             
             $object = $this->instances[$name];
 
             return new $object();
 
-        }elseif(is_callable($this->instances[$name])){
+        }
+        elseif(is_callable($this->instances[$name]))
+        {
 
             $callable = $this->instances[$name];
 

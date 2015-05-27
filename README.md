@@ -44,7 +44,7 @@ $newFoo = $app->make('foo');
 $newFoo2 = $app->make('foo');
 ```
 
-### Adding instance to container
+### Share singleton to container
 ```php
 use Lotus\Almari\Container as Container
 
@@ -53,16 +53,16 @@ $app = new Container();
 $foo = new Foo();
 
 // Share an instance
-$app->register('fooSingeleton',$foo);
+$app->share('fooSingeleton',$foo);
 
 // Share an instance (lazy load)
-$app->share('fooSingeleton',function(){
+$app->shareDeferred('fooSingeleton',function(){
 
 	return new Foo();
 
 });
 
-// Save instance using array access
+// Share instance using array access
 $app['fooSingeleton'] = $foo;
 
 ```
