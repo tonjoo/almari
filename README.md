@@ -14,7 +14,7 @@ Or you can put it on `composer.json`
 
 ```json
 "require": {
-        "lotus/almari": "*"
+        "tonjoo/almari": "*"
     }
 ```
 
