@@ -1,5 +1,5 @@
 {
-    "name": "lotus/almari",
+    "name": "tonjoo/almari",
     "description": "Almari is a micro IoC framework which implement service locator and facade pattern",
     "keywords": ["lotus", "framework","facade","ioc"],
     "license": "MIT",
