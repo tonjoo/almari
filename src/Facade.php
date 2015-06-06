@@ -52,7 +52,7 @@ abstract class Facade {
     public static function __callStatic($method, $args)
     {      
         // Resolve instance from container
-        $instance = static::$container->make(static::getFacadeAccessor());
+        $instance = static::$container->get(static::getFacadeAccessor());
       
         $name = get_class($instance);
 
